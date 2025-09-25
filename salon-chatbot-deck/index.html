@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon Chatbot – Intelligent Customer Engagement Platform</title>
+    
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.min.css">
+    
+    <style>
+        :root {
+            --brand: #00BCD4;
+            --foh: rgba(0, 188, 212, 0.08);
+            --boh: rgba(0, 0, 0, 0.05);
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --bg-light: #f8f9fa;
+            --border-light: #e1e4e8;
+            --shadow-light: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        /* Global Styles - Clean, minimal like fridge deck */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #ffffff;
+        }
+
+        .reveal {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 42px;
+            font-weight: normal;
+            color: var(--text-primary);
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        /* Headers matching fridge deck */
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: var(--text-primary);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin: 0 0 30px 0;
+        }
+
+        .reveal h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        .reveal h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            border-bottom: 3px solid var(--brand);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+
+        .reveal h3 {
+            font-size: 1.3em;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .reveal p {
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* Brand Header Bar - Clean like fridge deck */
+        .brand-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: white;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 100;
+            box-shadow: var(--shadow-light);
+        }
+
+        .brand-header img {
+            height: 46px;
+            width: auto;
+            margin-right: 24px;
+        }
+
+        .brand-header .deck-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        /* Slide Container */
+        .reveal .slides {
+            margin-top: 80px !important;
+        }
+
+        /* FOH/BOH Slide Backgrounds */
+        .reveal section.foh {
+            background: var(--foh);
+            padding: 60px;
+            box-sizing: border-box;
+        }
+
+        .reveal section.boh {
+            background: var(--boh);
+            padding: 60px;
+            box-sizing: border-box;
+        }
+
+        /* Diagram Styling - No scaling, large and readable */
+        .diagram {
+            display: block !important;
+            margin: 0 auto !important;
+            width: auto !important;
+            max-width: 95vw !important;
+            max-height: 78vh !important;
+            height: auto !important;
+            object-fit: contain !important;
+        }
+
+        /* Cover Slide */
+        .reveal section.cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, var(--bg-light) 100%);
+            padding: 60px;
+        }
+
+        .reveal section.cover img.cover-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 50px;
+        }
+
+        .reveal section.cover h1 {
+            font-size: 3.2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+        }
+
+        .reveal section.cover .strapline {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal section.cover .date {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        /* Badge/Pill Styling like fridge deck */
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: white;
+            border: 2px solid var(--brand);
+            color: var(--brand);
+            border-radius: 25px;
+            font-size: 0.7em;
+            font-weight: 600;
+            margin: 5px;
+            letter-spacing: 0.02em;
+        }
+
+        /* Bottom Navigation - Clean style */
+        .bottom-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 20px;
+        }
+
+        .bottom-nav button {
+            padding: 12px 32px;
+            background: white;
+            border: 2px solid var(--border-light);
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-light);
+            letter-spacing: 0.02em;
+        }
+
+        .bottom-nav button:hover {
+            background: var(--brand);
+            color: white;
+            border-color: var(--brand);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,188,212,0.3);
+        }
+
+        .bottom-nav button:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer-hint {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        /* Reveal.js Controls */
+        .reveal .controls {
+            bottom: 30px;
+            right: 30px;
+            color: var(--brand);
+        }
+
+        .reveal .controls button {
+            opacity: 0.5;
+        }
+
+        .reveal .controls button:hover {
+            opacity: 1;
+        }
+
+        /* Progress Bar */
+        .reveal .progress {
+            color: var(--brand);
+            height: 3px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .reveal .progress span {
+            background: var(--brand);
+        }
+
+        /* Slide Number */
+        .reveal .slide-number {
+            font-size: 14px;
+            background: rgba(0,0,0,0.05);
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: var(--text-secondary);
+            right: 30px;
+            bottom: 100px;
+        }
+
+        /* Images */
+        .reveal img {
+            max-width: none !important;
+            max-height: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: none !important;
+        }
+
+        /* Section spacing */
+        .reveal section {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .reveal h1 { font-size: 2em; }
+            .reveal h2 { font-size: 1.5em; }
+            .reveal section.cover h1 { font-size: 2.5em; }
+            .brand-header { padding: 0 20px; }
+            .brand-header .deck-title { font-size: 14px; }
+            .reveal section.foh,
+            .reveal section.boh { padding: 30px; }
+        }
+
+        /* Print styles */
+        @media print {
+            .brand-header,
+            .bottom-nav,
+            .footer-hint { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Brand Header -->
+    <div class="brand-header">
+        <img src="assets/logo.webp" alt="Maru Logo">
+        <div class="deck-title">Salon Chatbot – Intelligent Customer Engagement Platform</div>
+    </div>
+
+    <!-- Reveal.js Container -->
+    <div class="reveal">
+        <div class="slides">
+            <!-- Cover Slide -->
+            <section class="cover">
+                <img src="assets/logo.webp" alt="Maru Logo" class="cover-logo">
+                <h1>Salon Chatbot Platform</h1>
+                <p class="strapline">Smarter Conversations · Seamless Bookings · Data-Driven Growth</p>
+                <p class="date" id="currentDate"></p>
+            </section>
+
+            <!-- Slide 1: Solution Global Map (FOH) -->
+            <section class="foh">
+                <h2>Solution Global Map</h2>
+                <img src="assets/01-solution-global-map.svg" alt="Solution Global Map" class="diagram">
+            </section>
+
+            <!-- Slide 2: Conversation Triage & Routing (FOH) -->
+            <section class="foh">
+                <h2>Conversation Triage & Routing</h2>
+                <img src="assets/02-triage-routing.svg" alt="Conversation Triage & Routing" class="diagram">
+            </section>
+
+            <!-- Slide 3: Booking Flow (FOH) -->
+            <section class="foh">
+                <h2>Booking Flow</h2>
+                <img src="assets/03-booking-flow.svg" alt="Booking Flow" class="diagram">
+            </section>
+
+            <!-- Slide 4: Reminder & Escalation (FOH) -->
+            <section class="foh">
+                <h2>Reminder & Escalation</h2>
+                <img src="assets/04-reminders-escalation.svg" alt="Reminder & Escalation" class="diagram">
+            </section>
+
+            <!-- Slide 5: Product Discovery & Recommendations (FOH) -->
+            <section class="foh">
+                <h2>Product Discovery & Recommendations</h2>
+                <img src="assets/05-product-recommendations.svg" alt="Product Discovery & Recommendations" class="diagram">
+            </section>
+
+            <!-- Slide 6: FAQ RAG Answering (BOH) -->
+            <section class="boh">
+                <h2>FAQ RAG Answering</h2>
+                <img src="assets/06-faq-rag-sequence.svg" alt="FAQ RAG Answering" class="diagram">
+            </section>
+
+            <!-- Slide 7: Human Handoff & Sensitive Care (BOH) -->
+            <section class="boh">
+                <h2>Human Handoff & Sensitive Care</h2>
+                <img src="assets/07-human-handoff.svg" alt="Human Handoff & Sensitive Care" class="diagram">
+            </section>
+
+            <!-- Slide 8: Promotions & Loyalty (BOH) -->
+            <section class="boh">
+                <h2>Promotions & Loyalty</h2>
+                <img src="assets/08-promotions-loyalty.svg" alt="Promotions & Loyalty" class="diagram">
+            </section>
+
+            <!-- Slide 9: Data Flow to HubSpot (BOH) -->
+            <section class="boh">
+                <h2>Data Flow to HubSpot</h2>
+                <img src="assets/09-hubspot-data-flow.svg" alt="Data Flow to HubSpot" class="diagram">
+            </section>
+
+            <!-- Slide 10: Analytics & KPIs Pipeline (BOH) -->
+            <section class="boh">
+                <h2>Analytics & KPIs Pipeline</h2>
+                <img src="assets/10-analytics-kpis.svg" alt="Analytics & KPIs Pipeline" class="diagram">
+            </section>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <button id="prevBtn">← Prev</button>
+        <button id="nextBtn">Next →</button>
+    </div>
+
+    <!-- Footer Hint -->
+    <div class="footer-hint">
+        Use ←/→ arrows, Space to advance, F for fullscreen
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.js"></script>
+    
+    <script>
+        // Initialize Reveal.js
+        const deck = Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            controls: true,
+            controlsLayout: 'bottom-right',
+            progress: true,
+            slideNumber: true,
+            center: false,
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            minScale: 1,
+            maxScale: 1
+        });
+
+        // Set current date
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+
+        // Bottom navigation buttons
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            Reveal.prev();
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            Reveal.next();
+        });
+
+        // Update button states based on slide
+        Reveal.on('slidechanged', event => {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (Reveal.isFirstSlide()) {
+                prevBtn.style.opacity = '0.3';
+                prevBtn.style.cursor = 'not-allowed';
+            } else {
+                prevBtn.style.opacity = '1';
+                prevBtn.style.cursor = 'pointer';
+            }
+            
+            if (Reveal.isLastSlide()) {
+                nextBtn.style.opacity = '0.3';
+                nextBtn.style.cursor = 'not-allowed';
+            } else {
+                nextBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+            }
+        });
+
+        // Trigger initial state check
+        Reveal.on('ready', event => {
+            const prevBtn = document.getElementById('prevBtn');
+            if (Reveal.isFirstSlide()) {
+                prevBtn.style.opacity = '0.3';
+                prevBtn.style.cursor = 'not-allowed';
+            }
+        });
+    </script>
+</body>
+</html>
