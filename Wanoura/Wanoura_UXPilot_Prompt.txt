@@ -1,0 +1,74 @@
+
+Wanoura — Music Studio Website Wireframe Design (Neoto-Inspired)
+
+Design a multi-page website wireframe for a music production brand named "Wanoura".
+
+🔹 Brand Purpose:
+Wanoura is a high-end music studio that crafts bespoke sonic experiences for agencies, creatives, and media owners.
+
+🔹 Design Style Reference:
+Use the "Neoto" theme from ThemeVillain as visual inspiration. The design should follow a:
+- Minimalist and elegant layout
+- Clean, professional aesthetic
+- Dark theme with generous whitespace
+- High-end creative studio feel
+- Cinematic typography and smooth transitions
+
+🔹 Site Structure:
+Homepage with anchor links to:
+1. About
+2. Services
+3. Portfolio
+4. Contact
+
+🔹 Homepage Layout (sections):
+- Fixed Header: Logo left + navigation right
+- Hero Section: Dark full-screen intro with cinematic headline, subheadline, and [View Work] CTA
+- Brand Philosophy Preview: Center-aligned text block with quote or positioning statement + [Our Philosophy] CTA
+- Services Preview: 3 horizontal cards (Scoring & Composition, Sound Design & Audio Post, Branded Audio) with icons and short copy + [View Services]
+- Featured Project Section: Full-width image or video thumbnail with overlay + [Explore Portfolio] CTA
+- Founder Preview: Pull quote, minimalist portrait, name + [Meet the Creator] CTA
+- Final Call-to-Action: “Ready to bring your story to life?” + [Start Your Project] button
+- Footer: Logo, social icons, copyright
+
+🔹 Other Pages:
+
+1. About Page
+Design the "About" page for Wanoura — a cinematic music production studio.
+- Visual Style: Minimalist, dark theme (Neoto-inspired), editorial-style
+- Sections:
+  - Hero Banner with headline and abstract visual
+  - Story section: full-width copy
+  - Philosophy: 2-column layout with quote + process description
+  - Founder Profile: Portrait and bio
+  - CTA: [Explore Services]
+
+2. Services Page
+Design the "Services" page for Wanoura.
+- Visual Style: Dark theme, Neoto-style grid and clean layout
+- Sections:
+  - Hero Banner: Dark textured, headline and subheadline
+  - Services Grid: 3 vertical cards (Scoring, Sound Design, Branded Audio)
+  - Process Timeline: Discovery → Crafting → Refinement → Delivery
+  - Final CTA: [Start Your Project]
+
+3. Portfolio Page
+Design the "Portfolio" page for Wanoura.
+- Visual Style: Cinematic dark grid with hover effects
+- Sections:
+  - Hero Banner: Mosaic of thumbnails with headline and subheadline
+  - Project Grid: 3x2 or 3x3 layout
+  - Featured Case Study: Side-by-side layout
+  - CTA: [View Full Archive]
+
+4. Contact Page
+Design the "Contact" page for Wanoura.
+- Visual Style: Minimal, dark, centered layout
+- Sections:
+  - Hero Banner: Headline + subheadline
+  - Contact Form: Name, Email, Project Type, Message + [Send Message]
+  - Alternate Contact Info: Row of icons (Email, Instagram, Spotify, YouTube, LinkedIn)
+  - Final CTA: [Book a Consultation]
+
+🧠 Goal:
+Deliver a polished, immersive experience that reflects Wanoura's refined sound aesthetic and positions them as a top-tier creative audio partner.

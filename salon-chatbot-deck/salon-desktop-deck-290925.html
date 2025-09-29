@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-Powered Hair Salon Chatbot — Solution Deck</title>
+  <!-- Reveal.js core & theme via CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css" id="theme">
+  <style>
+    /* Brand tweaks */
+    :root{ --brand:#00BCD4; }
+    .reveal h1, .reveal h2, .reveal h3 { letter-spacing: .3px; }
+    .reveal .slides section { padding: 24px 0; }
+    .badge { display:inline-block; padding:.25rem .5rem; border:1px solid var(--brand); color:var(--brand); border-radius:999px; font-size:.7rem; }
+    .subtitle{ opacity:.85; font-weight:400; }
+    figcaption{ font-size:.7rem; opacity:.7; margin-top:.5rem; }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; }
+    .footer { position:fixed; bottom:12px; left:24px; right:24px; display:flex; justify-content:space-between; font-size:.7rem; opacity:.65; }
+    .footer a{ color:#fff; text-decoration:underline; }
+    img, svg { max-height:70vh; width:auto; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <h1>AI-Powered Hair Salon Chatbot</h1>
+        <p class="subtitle">End‑to‑End Solution Map, Flows & KPIs</p>
+        <p><span class="badge">WordPress · Azure · HubSpot</span></p>
+        <p style="margin-top:2rem; font-size:.9rem; opacity:.8">v1.0 — <span id="today"></span></p>
+      </section>
+
+      <!-- 01 Solution Global Map -->
+      <section>
+        <h2>01 · Solution Global Map</h2>
+        <figure>
+          <img src="assets/01-solution-global-map.svg" alt="Solution Global Map diagram" />
+          <figcaption>High-level system landscape.</figcaption>
+        </figure>
+      </section>
+
+      <!-- 02 Conversation Triage & Routing -->
+      <section>
+        <h2>02 · Conversation Triage & Routing</h2>
+        <figure>
+          <img src="assets/02-triage-routing.svg" alt="Conversation triage & routing" />
+        </figure>
+      </section>
+
+      <!-- 03 Booking Flow -->
+      <section>
+        <h2>03 · Booking Flow</h2>
+        <figure>
+          <img src="assets/03-booking-flow.svg" alt="Booking flow" />
+        </figure>
+      </section>
+
+      <!-- 04 Reminder & Escalation -->
+      <section>
+        <h2>04 · Reminder & Escalation</h2>
+        <figure>
+          <img src="assets/04-reminders-escalation.svg" alt="Reminder & escalation" />
+        </figure>
+      </section>
+
+      <!-- 05 Product Discovery -->
+      <section>
+        <h2>05 · Product Discovery & Recommendations</h2>
+        <figure>
+          <img src="assets/05-product-recommendations.svg" alt="Product discovery & recommendations" />
+        </figure>
+      </section>
+
+      <!-- 06 FAQ RAG -->
+      <section>
+        <h2>06 · FAQ RAG Answering</h2>
+        <figure>
+          <img src="assets/06-faq-rag-sequence.svg" alt="FAQ RAG answering" />
+        </figure>
+      </section>
+
+      <!-- 07 Human Handoff -->
+      <section>
+        <h2>07 · Human Handoff & Sensitive Care</h2>
+        <figure>
+          <img src="assets/07-human-handoff.svg" alt="Human handoff & sensitive care" />
+        </figure>
+      </section>
+
+      <!-- 08 Promotions & Loyalty -->
+      <section>
+        <h2>08 · Promotions & Loyalty</h2>
+        <figure>
+          <img src="assets/08-promotions-loyalty.svg" alt="Promotions & loyalty" />
+        </figure>
+      </section>
+
+      <!-- 09 Data Flow to HubSpot -->
+      <section>
+        <h2>09 · Data Flow to HubSpot</h2>
+        <figure>
+          <img src="assets/09-hubspot-data-flow.svg" alt="Data flow to HubSpot" />
+        </figure>
+      </section>
+
+      <!-- 10 Analytics & KPIs -->
+      <section>
+        <h2>10 · Analytics & KPIs Pipeline</h2>
+        <figure>
+          <img src="assets/10-analytics-kpis.svg" alt="Analytics & KPIs pipeline" />
+        </figure>
+      </section>
+
+      <!-- CLOSER / CONTACT -->
+      <section>
+        <h2>Thank you</h2>
+        <div class="two-col">
+          <div>
+            <p style="opacity:.8">Questions, feedback, or change requests?</p>
+            <ul>
+              <li>Refine flows (copy & arrows)</li>
+              <li>Add Front‑of‑House vs Back‑of‑House colors</li>
+              <li>Embed live Mermaid in-deck (optional)</li>
+            </ul>
+          </div>
+          <div>
+            <p><span class="badge">Next: stakeholder review → sign‑off → build</span></p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>AI-Powered Hair Salon Chatbot — Solution Deck</span>
+    <span>Use ← → or Space to navigate • Press <kbd>F</kbd> for full screen</span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script>
+    // Init Reveal
+    const deck = new Reveal({ hash: true, transition: 'slide', controls: true, progress: true, slideNumber: true });
+    deck.initialize();
+    // Stamp today's date
+    const el = document.getElementById('today');
+    if (el) el.textContent = new Date().toLocaleDateString();
+  </script>
+</body>
+</html>

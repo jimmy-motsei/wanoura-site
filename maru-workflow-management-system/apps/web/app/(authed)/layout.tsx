@@ -1,13 +1,12 @@
-import React from 'react'
+import type { ReactNode } from 'react'
+import type { Role } from '@maru/core'
+import { AuthedShell } from '@/components/authed-shell'
 
-export default function AuthedLayout({children}:{children: React.ReactNode}){
-  // TODO: add B2C session/role check & redirect
-  return (
-    <html lang="en">
-      <body className="min-h-screen bg-gray-50">
-        <div className="p-4 border-b bg-white">Maru • Dashboard</div>
-        <div className="p-4">{children}</div>
-      </body>
-    </html>
-  )
+const DEFAULT_ROLE: Role = 'consultant'
+
+export default function AuthedLayout({ children }: { children: ReactNode }) {
+  // TODO: replace role detection with Azure B2C session lookup
+  const role = DEFAULT_ROLE
+
+  return <AuthedShell role={role}>{children}</AuthedShell>
 }

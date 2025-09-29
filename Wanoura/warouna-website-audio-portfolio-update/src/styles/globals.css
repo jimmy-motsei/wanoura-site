@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg: #0A0A0A; /* midnight */
+  --fg: #F8F5F0; /* ivory */
+  --gold: #D4AF37;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.container {
+  @apply max-w-6xl mx-auto px-6;
+}
+
+.btn-primary{
+  @apply inline-block px-6 py-3 rounded-2xl bg-gold text-black font-semibold shadow;
+}
+.btn-secondary{
+  @apply inline-block px-6 py-3 rounded-2xl border border-gold text-gold font-semibold;
+}
+
+.section {
+  @apply py-16;
+}

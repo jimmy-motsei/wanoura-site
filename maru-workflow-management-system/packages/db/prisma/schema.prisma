@@ -15,21 +15,29 @@ enum Role {
 }
 
 model User {
-  id                String   @id @default(cuid())
-  email             String   @unique
-  name              String?
-  role              Role
-  orgId             String?
-  hubspotContactId  String?
-  createdAt         DateTime @default(now())
+  id               String   @id @default(cuid())
+  email            String   @unique
+  name             String?
+  role             Role
+  orgId            String?
+  hubspotContactId String?
+  createdAt        DateTime @default(now())
+
+  organization     Organization?     @relation(fields: [orgId], references: [id])
+  candidateProfile CandidateProfile?
+  createdJobs      Job[]             @relation("CreatedByUser")
+  assignments      Application[]     @relation("AssignedConsultant")
+  auditLogs        AuditLog[]
 }
 
 model Organization {
-  id               String   @id @default(cuid())
+  id               String  @id @default(cuid())
   name             String
   domain           String?
   hubspotCompanyId String?
-  users            User[]
+
+  users User[]
+  jobs  Job[]
 }
 
 model Job {
@@ -44,17 +52,24 @@ model Job {
   hubspotDealId  String?
   createdBy      String
   createdAt      DateTime @default(now())
+
+  organization Organization  @relation(fields: [orgId], references: [id])
+  creator      User          @relation("CreatedByUser", fields: [createdBy], references: [id])
+  applications Application[]
 }
 
 model CandidateProfile {
-  id              String   @id @default(cuid())
-  userId          String   @unique
+  id              String  @id @default(cuid())
+  userId          String  @unique
   summary         String?
   yearsExperience Int?
   location        String?
   skills          Json?
   education       Json?
-  cvs             CvAsset[]
+
+  user         User          @relation(fields: [userId], references: [id])
+  cvs          CvAsset[]
+  applications Application[]
 }
 
 model CvAsset {
@@ -65,18 +80,25 @@ model CvAsset {
   parsedVersion Int      @default(1)
   checksum      String?
   createdAt     DateTime @default(now())
+
+  candidate CandidateProfile @relation(fields: [candidateId], references: [id])
 }
 
 model Application {
-  id                     String   @id @default(cuid())
-  jobId                  String
-  candidateId            String
-  stage                  String   @default("New")
-  score                  Int      @default(0)
-  tags                   String[]
-  notes                  String?
-  assignedConsultantId   String?
-  createdAt              DateTime @default(now())
+  id                   String   @id @default(cuid())
+  jobId                String
+  candidateId          String
+  stage                String   @default("New")
+  score                Int      @default(0)
+  tags                 String[]
+  notes                String?
+  assignedConsultantId String?
+  createdAt            DateTime @default(now())
+
+  job                Job              @relation(fields: [jobId], references: [id])
+  candidate          CandidateProfile @relation(fields: [candidateId], references: [id])
+  assignedConsultant User?            @relation("AssignedConsultant", fields: [assignedConsultantId], references: [id])
+  interviews         Interview[]
 }
 
 model Interview {
@@ -86,6 +108,8 @@ model Interview {
   method          String
   status          String   @default("proposed")
   externalEventId String?
+
+  application Application @relation(fields: [applicationId], references: [id])
 }
 
 model AuditLog {
@@ -96,4 +120,6 @@ model AuditLog {
   action      String
   payload     Json?
   ts          DateTime @default(now())
+
+  actorUser User @relation(fields: [actorUserId], references: [id])
 }

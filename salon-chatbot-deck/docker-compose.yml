@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  salon-chatbot:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - salon-network
+
+  # Optional: Add a reverse proxy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - salon-chatbot
+    restart: unless-stopped
+    networks:
+      - salon-network
+
+  # Optional: Add a database for production
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=salon_chatbot
+      - POSTGRES_USER=salonbot
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-salonbot123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    restart: unless-stopped
+    networks:
+      - salon-network
+
+  # Optional: Add Redis for caching
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - salon-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  salon-network:
+    driver: bridge
+
+
+
+
+
+
