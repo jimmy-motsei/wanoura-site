@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  consultant
+  seeker
+  provider
+  admin
+}
+
+model User {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  name              String?
+  role              Role
+  orgId             String?
+  hubspotContactId  String?
+  createdAt         DateTime @default(now())
+}
+
+model Organization {
+  id               String   @id @default(cuid())
+  name             String
+  domain           String?
+  hubspotCompanyId String?
+  users            User[]
+}
+
+model Job {
+  id             String   @id @default(cuid())
+  orgId          String
+  title          String
+  description    String
+  location       String?
+  employmentType String?
+  seniority      String?
+  status         String   @default("open")
+  hubspotDealId  String?
+  createdBy      String
+  createdAt      DateTime @default(now())
+}
+
+model CandidateProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  summary         String?
+  yearsExperience Int?
+  location        String?
+  skills          Json?
+  education       Json?
+  cvs             CvAsset[]
+}
+
+model CvAsset {
+  id            String   @id @default(cuid())
+  candidateId   String
+  blobUrl       String
+  parsedJson    Json?
+  parsedVersion Int      @default(1)
+  checksum      String?
+  createdAt     DateTime @default(now())
+}
+
+model Application {
+  id                     String   @id @default(cuid())
+  jobId                  String
+  candidateId            String
+  stage                  String   @default("New")
+  score                  Int      @default(0)
+  tags                   String[]
+  notes                  String?
+  assignedConsultantId   String?
+  createdAt              DateTime @default(now())
+}
+
+model Interview {
+  id              String   @id @default(cuid())
+  applicationId   String
+  when            DateTime
+  method          String
+  status          String   @default("proposed")
+  externalEventId String?
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String
+  entityType  String
+  entityId    String
+  action      String
+  payload     Json?
+  ts          DateTime @default(now())
+}

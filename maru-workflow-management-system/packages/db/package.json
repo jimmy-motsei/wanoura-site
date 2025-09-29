@@ -1,0 +1,12 @@
+{
+  "name": "@maru/db",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "src/client.ts",
+  "dependencies": {
+    "@prisma/client": "^5.18.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.18.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@maru/functions",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "func start"
+  },
+  "devDependencies": {
+    "@azure/functions": "^4.5.0"
+  }
+}
